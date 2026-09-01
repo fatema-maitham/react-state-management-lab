@@ -116,11 +116,37 @@ const App = () => {
     setMoney(money - fighter.price);
   }
 
+  const totalStrength = team.reduce((total, fighter) => total + fighter.strength, 0);
+  const totalAgility = team.reduce((total, fighter) => total + fighter.agility, 0);
+
+
   return (
     <div>
       <h1>Zombie Fighters</h1>
 
       <p>Money: ${money}</p>
+      <p>Total Strength: {totalStrength}</p>
+      <p>Total Agility: {totalAgility}</p>
+
+      <h2>Your Team</h2>
+
+      {team.length === 0 ? (
+        <p>Pick some team members!</p>
+      ) : (
+        <ul>
+          {team.map((fighter) => (
+            <li key={fighter.id}>
+              <img src={fighter.img} alt={fighter.name} />
+              <h2>{fighter.name}</h2>
+              <p>Price: ${fighter.price}</p>
+              <p>Strength: {fighter.strength}</p>
+              <p>Agility: {fighter.agility}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <h2>Available Fighters</h2>
 
       <ul>
         {zombieFighters.map((fighter) => (
